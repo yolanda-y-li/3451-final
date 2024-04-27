@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/yolandali/Documents/CS 3451/3451-final/tutorials/tutorial_opengl/glfw-3.3/deps/getopt.c" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/__/deps/getopt.c.o" "gcc" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/__/deps/getopt.c.o.d"
-  "/Users/yolandali/Documents/CS 3451/3451-final/tutorials/tutorial_opengl/glfw-3.3/deps/glad_gl.c" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/__/deps/glad_gl.c.o" "gcc" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/__/deps/glad_gl.c.o.d"
-  "/Users/yolandali/Documents/CS 3451/3451-final/tutorials/tutorial_opengl/glfw-3.3/tests/clipboard.c" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/clipboard.c.o" "gcc" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/clipboard.c.o.d"
+  "/Users/husnajakeer/Documents/Husna/GT/3451-final/tutorials/tutorial_opengl/glfw-3.3/deps/getopt.c" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/__/deps/getopt.c.o" "gcc" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/__/deps/getopt.c.o.d"
+  "/Users/husnajakeer/Documents/Husna/GT/3451-final/tutorials/tutorial_opengl/glfw-3.3/deps/glad_gl.c" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/__/deps/glad_gl.c.o" "gcc" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/__/deps/glad_gl.c.o.d"
+  "/Users/husnajakeer/Documents/Husna/GT/3451-final/tutorials/tutorial_opengl/glfw-3.3/tests/clipboard.c" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/clipboard.c.o" "gcc" "tutorials/tutorial_opengl/glfw-3.3/tests/CMakeFiles/clipboard.dir/clipboard.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

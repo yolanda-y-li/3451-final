@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yolandali/Documents/CS 3451/3451-final/assignments
+# Install script for directory: /Users/husnajakeer/Documents/Husna/GT/3451-final/assignments
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,15 +39,15 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a1/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a2/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a3/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a4/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a5/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a6/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a7/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a8/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/a9/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a1/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a2/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a3/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a4/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a5/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a6/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a7/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a8/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/assignments/a9/cmake_install.cmake")
 
 endif()
 

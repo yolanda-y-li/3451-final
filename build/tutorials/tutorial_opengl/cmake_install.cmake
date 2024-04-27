@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yolandali/Documents/CS 3451/3451-final/tutorials/tutorial_opengl
+# Install script for directory: /Users/husnajakeer/Documents/Husna/GT/3451-final/tutorials/tutorial_opengl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_opengl/glfw-3.3/cmake_install.cmake")
+  include("/Users/husnajakeer/Documents/Husna/GT/3451-final/build/tutorials/tutorial_opengl/glfw-3.3/cmake_install.cmake")
 
 endif()
 
