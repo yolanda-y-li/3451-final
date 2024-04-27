@@ -161,13 +161,13 @@ public:
         //// Here we load a bunny object with the basic shader to show how to add an object into the scene
         {
             //// create object by reading an obj mesh
-            auto bunny = Add_Obj_Mesh_Object("obj/bunny.obj");
+            auto bunny = Add_Obj_Mesh_Object("obj/shark.obj");
 
             //// set object's transform
             Matrix4f t;
-            t << 1, 0, 0, 1.5,
-                0, 1, 0, 0,
-                0, 0, 1, 0,
+            t << 0.2, 0, 0, 1.0,
+                0, 0.2, 0, 0,
+                0, 0, 0.2, 0,
                 0, 0, 0, 1;
             bunny->Set_Model_Matrix(t);
 
