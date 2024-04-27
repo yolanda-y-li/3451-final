@@ -1,22 +1,22 @@
 
-if (NOT EXISTS "/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_opengl/glfw-3.3/install_manifest.txt")
-  message(FATAL_ERROR "Cannot find install manifest: \"/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_opengl/glfw-3.3/install_manifest.txt\"")
+if (NOT EXISTS "/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_opengl/glfw-3.3/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: \"/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_opengl/glfw-3.3/install_manifest.txt\"")
 endif()
 
-file(READ "/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_opengl/glfw-3.3/install_manifest.txt" files)
+file(READ "/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_opengl/glfw-3.3/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 
 foreach (file ${files})
   message(STATUS "Uninstalling \"$ENV{DESTDIR}${file}\"")
   if (EXISTS "$ENV{DESTDIR}${file}")
-    exec_program("/opt/homebrew/Cellar/cmake/3.28.1/bin/cmake" ARGS "-E remove \"$ENV{DESTDIR}${file}\""
+    exec_program("/opt/homebrew/Cellar/cmake/3.29.2/bin/cmake" ARGS "-E remove \"$ENV{DESTDIR}${file}\""
                  OUTPUT_VARIABLE rm_out
                  RETURN_VALUE rm_retval)
     if (NOT "${rm_retval}" STREQUAL 0)
       MESSAGE(FATAL_ERROR "Problem when removing \"$ENV{DESTDIR}${file}\"")
     endif()
   elseif (IS_SYMLINK "$ENV{DESTDIR}${file}")
-    EXEC_PROGRAM("/opt/homebrew/Cellar/cmake/3.28.1/bin/cmake" ARGS "-E remove \"$ENV{DESTDIR}${file}\""
+    EXEC_PROGRAM("/opt/homebrew/Cellar/cmake/3.29.2/bin/cmake" ARGS "-E remove \"$ENV{DESTDIR}${file}\""
                  OUTPUT_VARIABLE rm_out
                  RETURN_VALUE rm_retval)
     if (NOT "${rm_retval}" STREQUAL 0)

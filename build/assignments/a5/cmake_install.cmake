@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/assignments/a5
+# Install script for directory: /Users/yolandali/Documents/CS 3451/3451-final/assignments/a5
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

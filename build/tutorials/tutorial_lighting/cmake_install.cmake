@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/tutorials/tutorial_lighting
+# Install script for directory: /Users/yolandali/Documents/CS 3451/3451-final/tutorials/tutorial_lighting
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

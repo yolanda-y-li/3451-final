@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/tutorials
+# Install script for directory: /Users/yolandali/Documents/CS 3451/3451-final/tutorials
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,16 +39,16 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_camera/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_cpp101/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_hello_glsl/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_lighting/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_matrix/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_mesh/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_opengl/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_shader_programming/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_texture/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/tutorial_transform/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_camera/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_cpp101/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_hello_glsl/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_lighting/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_matrix/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_mesh/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_opengl/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_shader_programming/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_texture/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/tutorial_transform/cmake_install.cmake")
 
 endif()
 

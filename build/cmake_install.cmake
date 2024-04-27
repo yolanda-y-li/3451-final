@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code
+# Install script for directory: /Users/yolandali/Documents/CS 3451/3451-final
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,8 +39,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/assignments/cmake_install.cmake")
-  include("/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/tutorials/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/assignments/cmake_install.cmake")
+  include("/Users/yolandali/Documents/CS 3451/3451-final/build/tutorials/cmake_install.cmake")
 
 endif()
 
@@ -52,5 +52,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/yolandali/Documents/CS 3451/cs3451-computer-graphics-starter-code/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/yolandali/Documents/CS 3451/3451-final/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
