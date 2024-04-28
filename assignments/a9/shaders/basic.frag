@@ -50,7 +50,24 @@ out vec4 frag_color;
 
 vec3 shading_texture_with_phong(light li, vec3 e, vec3 p, vec3 s, vec3 n)
 {
-    return vec3(0.0);
+    vec3 color = vec3(0.0);
+    vec3 tex_color = texture(tex_color, vtx_uv).rgb;
+    
+    vec3 Ia = li.amb.xyz;
+    vec3 ambient = ka * Ia;
+    
+    vec3 l = normalize(s - p);
+    vec3 Id = li.dif.xyz;
+    vec3 lambertian = kd * Id * max(0, dot(l, n)) * tex_color;
+
+    vec3 Is = li.spec.xyz;
+    vec3 v = normalize(e - p);
+    vec3 r = normalize(reflect(p - s, n));
+    vec3 phong = ks * Is * pow(max(0, dot(v, r)), shininess);
+    
+    color = ambient + lambertian + phong;
+
+    return color;
 }
 
 vec3 read_normal_texture()
@@ -60,15 +77,34 @@ vec3 read_normal_texture()
     return normal;
 }
 
+mat3 calc_TBN_matrix(vec3 T, vec3 B, vec3 N) 
+{
+    mat3 TBN = mat3(0.0);   //// the TBN matrix you need to calculate
+
+    TBN[0] = T;
+    TBN[1] = B;
+    TBN[2] = N;
+
+    return TBN;
+}
+
 void main()
 {
     vec3 e = position.xyz;              //// eye position
     vec3 p = vtx_position;              //// surface position
     vec3 N = normalize(vtx_normal);     //// normal vector
     vec3 T = normalize(vtx_tangent);    //// tangent vector
+    
+    vec3 B = normalize(cross(N, T));
+    mat3 TBN = calc_TBN_matrix(T, B, N);
+    vec3 normal = read_normal_texture();
+    vec3 perturbed_normal = TBN * normal;
+    
+    vec3 color = vec3(0.0);
 
-    vec3 texture_normal = read_normal_texture();
-    vec3 texture_color = texture(tex_color, vtx_uv).rgb;
+    for (int i = 0; i < lt_att[0]; i++) {
+        color += shading_texture_with_phong(lt[i], e, p, lt[i].pos.xyz, perturbed_normal);
+    }
 
-    frag_color = vec4(texture_color.rgb, 1.0);
+    frag_color = vec4(color, texture(tex_color, vtx_uv).w);
 }
