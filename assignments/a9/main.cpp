@@ -71,6 +71,9 @@ public:
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/window.png", "window_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/buzz_color.png", "buzz_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/star.png", "star_color");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_color.jpg", "rock_color");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_normal.png", "rock_normal");
+
 
         //// Add all the lights you need for the scene (no more than 4 lights)
         //// The four parameters are position, ambient, diffuse, and specular.
@@ -161,7 +164,7 @@ public:
         //// Here we load a bunny object with the basic shader to show how to add an object into the scene
         {
             //// create object by reading an obj mesh
-            auto bunny = Add_Obj_Mesh_Object("obj/shark.obj");
+            auto shark = Add_Obj_Mesh_Object("obj/shark.obj");
 
             //// set object's transform
             Matrix4f t;
@@ -169,20 +172,47 @@ public:
                 0, 0.2, 0, 0,
                 0, 0, 0.2, 0,
                 0, 0, 0, 1;
-            bunny->Set_Model_Matrix(t);
+            shark->Set_Model_Matrix(t);
 
             //// set object's material
-            bunny->Set_Ka(Vector3f(0.1, 0.1, 0.1));
-            bunny->Set_Kd(Vector3f(0.7, 0.7, 0.7));
-            bunny->Set_Ks(Vector3f(2, 2, 2));
-            bunny->Set_Shininess(128);
+            shark->Set_Ka(Vector3f(0.1, 0.1, 0.1));
+            shark->Set_Kd(Vector3f(0.7, 0.7, 0.7));
+            shark->Set_Ks(Vector3f(2, 2, 2));
+            shark->Set_Shininess(128);
 
             //// bind texture to object
-            bunny->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("bunny_color"));
-            bunny->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("bunny_normal"));
+            shark->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("bunny_color"));
+            shark->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("bunny_normal"));
 
             //// bind shader to object
-            bunny->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+            shark->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+        }
+
+        // adding a rock
+        {
+            //// create object by reading an obj mesh
+            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
+
+            //// set object's transform
+            Matrix4f t;
+            t << 0.02, 0, 0, 1.0,
+                0, 0.02, 0, 0,
+                0, 0, 0.02, 0,
+                0, 0, 0, 1;
+            rock->Set_Model_Matrix(t);
+
+            //// set object's material
+            rock->Set_Ka(Vector3f(0, 0.16, 1.));
+            rock->Set_Kd(Vector3f(1., 0.1, 0.1));
+            rock->Set_Ks(Vector3f(2, 2, 2));
+            rock->Set_Shininess(10);
+
+            //// bind texture to object
+            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+
+            //// bind shader to object
+            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
         }
 
         //// Here we show an example of adding a mesh with noise-terrain (A6)
@@ -193,16 +223,16 @@ public:
             //// set object's transform
             Matrix4f r, s, t;
             r << 1, 0, 0, 0,
-                0, 0.5, 0.67, 0,
-                0, -0.67, 0.5, 0,
+                0, 0.258, 0.965, 0,
+                0, -0.965, 0.258, 0,
                 0, 0, 0, 1;
-            s << 0.5, 0, 0, 0,
-                0, 0.5, 0, 0,
-                0, 0, 0.5, 0,
+            s << 20, 0, 0,0,
+                0, 20, 0, 0,
+                0, 0, 20, 0,
                 0, 0, 0, 1;
-            t << 1, 0, 0, -2,
-                 0, 1, 0, 0.5,
-                 0, 0, 1, 0,
+            t << 1, 0, 0, 1,
+                 0, 1, 0, -5,
+                 0, 0, 1, 1,
                  0, 0, 0, 1,
             terrain->Set_Model_Matrix(t * s * r);
 
@@ -219,7 +249,7 @@ public:
         //// Here we show an example of adding a transparent object with alpha blending
         //// This example will be useful if you implement objects such as tree leaves, grass blades, flower pedals, etc.
         //// Alpha blending will be turned on automatically if your texture has the alpha channel
-        {
+        /**{
             //// create object by reading an obj mesh
             auto sqad = Add_Obj_Mesh_Object("obj/sqad.obj");
 
@@ -258,7 +288,7 @@ public:
 
             //// bind shader to object
             sqad->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("billboard"));
-        }
+        }*/
 
         //// Here we show an example of shading (ray-tracing) a sphere with environment mapping
         /*
