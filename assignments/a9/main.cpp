@@ -201,27 +201,29 @@ public:
             shark->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
         }
         {
-            float xPos = -0.5;
-            float yPos = 1.5;
-            float zPos = 0.2;
-            std::vector<float> time = {0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0};
-            for (int i = 0; i < 10; i++) {
+            float center_x = 1.0;
+            float center_y = 0.0;
+            float center_z = 1.0;
+
+            int numFish = 30;
+
+            for (int i = 0; i < numFish; i++) {
                 //// create object by reading an obj mesh
                 auto fish = Add_Obj_Mesh_Object("obj/fish.obj");
-			    float angle = DegreesToRadians(150 * time[i]);
                 //// set object's transform
+                float angle = -i + 3.1415 / 2 + .5 * hash1d(i);
                 Matrix4f t;
-				t << -2*sin(angle), cos(angle), 0., 9.8 * time[i] - 0.5 * 9.8 * time[i] * time[i],
-                    cos(angle),2*sin(angle), 0., -5. + 5 * time[i],
-					0.,  		 0., 		 2., 0.,
-					0., 		 0., 		 0., 1.;
+				t << cos(angle),  0,  sin(angle), center_x + 5 * cos(i) + 2 * hash1d(i),
+                    0,            1., 0,          center_y + 0.3 * i - 3 + 2 * hash1d(i),
+                    -sin(angle),  0,  cos(angle), center_z + 5 * sin(i) + 2 * hash1d(i),
+                    0,            0,  0,          1;
                 fish->Set_Model_Matrix(t);
 
                 //// set object's material
                 fish->Set_Ka(Vector3f(0.1, 0.1, 0.1));
                 fish->Set_Kd(Vector3f(0.7, 0.7, 0.7));
                 fish->Set_Ks(Vector3f(0.5, 0.5, 0.5));
-                fish->Set_Shininess(128);
+                fish->Set_Shininess(20);
 
                 //// bind texture to object
                 fish->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("fish_color"));
@@ -229,9 +231,40 @@ public:
 
                 //// bind shader to object
                 fish->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
-                xPos -= 0.3;
-                yPos += 0.3;
-                zPos -= 0.3;
+            }
+        }
+
+        {
+            float center_x = 1.0;
+            float center_y = 0.0;
+            float center_z = 1.0;
+
+            int numFish = 30;
+
+            for (int i = 0; i < numFish; i++) {
+                //// create object by reading an obj mesh
+                auto fish = Add_Obj_Mesh_Object("obj/fish.obj");
+                //// set object's transform
+                float angle = -i + 3.1415 / 2 + .5 * hash1d(i);
+                Matrix4f t;
+				t << cos(angle),  0,  sin(angle), center_x + 8 * cos(i) + 2 * hash1d(i) + 0.5,
+                    0,            1., 0,          center_y + 0.5 * i - 5 + 2 * hash1d(i) + 0.5,
+                    -sin(angle),  0,  cos(angle), center_z + 8 * sin(i) + 2 * hash1d(i) + 0.5,
+                    0,            0,  0,          1;
+                fish->Set_Model_Matrix(t);
+
+                //// set object's material
+                fish->Set_Ka(Vector3f(0.1, 0.1, 0.1));
+                fish->Set_Kd(Vector3f(0.7, 0.7, 0.7));
+                fish->Set_Ks(Vector3f(0.5, 0.5, 0.5));
+                fish->Set_Shininess(20);
+
+                //// bind texture to object
+                fish->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("fish_color"));
+                fish->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("fish_normal"));
+
+                //// bind shader to object
+                fish->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
             }
         }
             
