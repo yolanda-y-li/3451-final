@@ -267,6 +267,7 @@ public:
                 yPos += 0.3;
                 zPos -= 0.3;
             }
+        }
             
         // adding a rock
         {
