@@ -21,6 +21,8 @@
 #define CLOCKS_PER_SEC 100000
 #endif
 
+#define DegreesToRadians(degrees) (degrees * M_PI / 180)
+
 class MyDriver : public OpenGLViewer
 {
     std::vector<OpenGLTriangleMesh *> mesh_object_array;
@@ -198,57 +200,21 @@ public:
             //// bind shader to object
             shark->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
         }
-
-        {
-            float xPos = 1.0;
-            float yPos = 0.5;
-            float zPos = 0.0;
-
-            for (int i = 0; i < 5; i++) {
-                //// create object by reading an obj mesh
-                auto fish = Add_Obj_Mesh_Object("obj/fish.obj");
-
-                //// set object's transform
-                Matrix4f t;
-                t << 0.8, 0, 0, xPos,
-                    0, 0.8, 0, yPos,
-                    0, 0, 0.8, zPos,
-                    0, 0, 0, 1;
-                fish->Set_Model_Matrix(t);
-
-                //// set object's material
-                fish->Set_Ka(Vector3f(0.1, 0.1, 0.1));
-                fish->Set_Kd(Vector3f(0.7, 0.7, 0.7));
-                fish->Set_Ks(Vector3f(0.5, 0.5, 0.5));
-                fish->Set_Shininess(80);
-
-                //// bind texture to object
-                fish->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("fish_color"));
-                fish->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("fish_normal"));
-
-                //// bind shader to object
-                fish->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
-                xPos -= 0.3 + 0.25 * hash1d(i);
-                yPos += 0.3 + 0.25 * hash1d(i);
-                zPos -= 0.3 + 0.25 * hash1d(i);
-            }
-        }
-
         {
             float xPos = -0.5;
             float yPos = 1.5;
             float zPos = 0.2;
-
-            for (int i = 0; i < 4; i++) {
+            std::vector<float> time = {0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0};
+            for (int i = 0; i < 10; i++) {
                 //// create object by reading an obj mesh
                 auto fish = Add_Obj_Mesh_Object("obj/fish.obj");
-
+			    float angle = DegreesToRadians(150 * time[i]);
                 //// set object's transform
                 Matrix4f t;
-                t << 0.8, 0, 0, xPos,
-                    0, 0.8, 0, yPos,
-                    0, 0, 0.8, zPos,
-                    0, 0, 0, 1;
+				t << -2*sin(angle), cos(angle), 0., 9.8 * time[i] - 0.5 * 9.8 * time[i] * time[i],
+                    cos(angle),2*sin(angle), 0., -5. + 5 * time[i],
+					0.,  		 0., 		 2., 0.,
+					0., 		 0., 		 0., 1.;
                 fish->Set_Model_Matrix(t);
 
                 //// set object's material
