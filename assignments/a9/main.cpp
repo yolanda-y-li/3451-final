@@ -72,6 +72,12 @@ public:
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/buzz_color.png", "buzz_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/star.png", "star_color");
 
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/fish_color.png", "fish_color");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/fish_normal.png", "fish_normal");
+
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/shark_color.png", "shark_color");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/shark_normal.png", "shark_normal");
+
         //// Add all the lights you need for the scene (no more than 4 lights)
         //// The four parameters are position, ambient, diffuse, and specular.
         //// The lights you declared here will be synchronized to all shaders in uniform lights.
@@ -79,9 +85,9 @@ public:
         //// You can also create your own lights by directly declaring them in a shader without using Add_Light().
         //// Here we declared three default lights for you. Feel free to add/delete/change them at your will.
 
-        opengl_window->Add_Light(Vector3f(3, 1, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(1, 1, 1), Vector3f(0.5, 0.5, 0.5)); 
-        opengl_window->Add_Light(Vector3f(0, 0, -5), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
-        opengl_window->Add_Light(Vector3f(-5, 1, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
+        opengl_window->Add_Light(Vector3f(3, 1, 3), Vector3f(0.1, 0.1, 0.4), Vector3f(1, 1, 1), Vector3f(0.5, 0.5, 0.5)); 
+        opengl_window->Add_Light(Vector3f(0, 8, -5), Vector3f(0.1, 0.2, 0.4), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
+        opengl_window->Add_Light(Vector3f(-1, 1, 3), Vector3f(0.1, 0.1, 0.3), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
 
         //// Add the background / environment
         //// Here we provide you with four default options to create the background of your scene:
@@ -161,28 +167,98 @@ public:
         //// Here we load a bunny object with the basic shader to show how to add an object into the scene
         {
             //// create object by reading an obj mesh
-            auto bunny = Add_Obj_Mesh_Object("obj/shark.obj");
+            auto shark = Add_Obj_Mesh_Object("obj/new_shark.obj");
 
             //// set object's transform
             Matrix4f t;
-            t << 0.2, 0, 0, 1.0,
-                0, 0.2, 0, 0,
-                0, 0, 0.2, 0,
+            t << 0.5, 0, 0, 1.0,
+                0, 0.5, 0, 0,
+                0, 0, 0.5, 0,
                 0, 0, 0, 1;
-            bunny->Set_Model_Matrix(t);
+            shark->Set_Model_Matrix(t);
 
             //// set object's material
-            bunny->Set_Ka(Vector3f(0.1, 0.1, 0.1));
-            bunny->Set_Kd(Vector3f(0.7, 0.7, 0.7));
-            bunny->Set_Ks(Vector3f(2, 2, 2));
-            bunny->Set_Shininess(128);
+            shark->Set_Ka(Vector3f(0.1, 0.1, 0.1));
+            shark->Set_Kd(Vector3f(0.9, 0.9, 0.9));
+            shark->Set_Ks(Vector3f(0.2, 0.2, 0.2));
+            shark->Set_Shininess(30);
 
             //// bind texture to object
-            bunny->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("bunny_color"));
-            bunny->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("bunny_normal"));
+            shark->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("shark_color"));
+            shark->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("shark_normal"));
 
             //// bind shader to object
-            bunny->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+            shark->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+        }
+
+        {
+            float xPos = 1.0;
+            float yPos = 0.5;
+            float zPos = 0.0;
+
+            for (int i = 0; i < 5; i++) {
+                //// create object by reading an obj mesh
+                auto fish = Add_Obj_Mesh_Object("obj/fish.obj");
+
+                //// set object's transform
+                Matrix4f t;
+                t << 0.8, 0, 0, xPos,
+                    0, 0.8, 0, yPos,
+                    0, 0, 0.8, zPos,
+                    0, 0, 0, 1;
+                fish->Set_Model_Matrix(t);
+
+                //// set object's material
+                fish->Set_Ka(Vector3f(0.1, 0.1, 0.1));
+                fish->Set_Kd(Vector3f(0.7, 0.7, 0.7));
+                fish->Set_Ks(Vector3f(0.5, 0.5, 0.5));
+                fish->Set_Shininess(80);
+
+                //// bind texture to object
+                fish->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("fish_color"));
+                fish->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("fish_normal"));
+
+                //// bind shader to object
+                fish->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+                xPos -= 0.3 + 0.25 * hash1d(i);
+                yPos += 0.3 + 0.25 * hash1d(i);
+                zPos -= 0.3 + 0.25 * hash1d(i);
+            }
+        }
+
+        {
+            float xPos = -0.5;
+            float yPos = 1.5;
+            float zPos = 0.2;
+
+            for (int i = 0; i < 4; i++) {
+                //// create object by reading an obj mesh
+                auto fish = Add_Obj_Mesh_Object("obj/fish.obj");
+
+                //// set object's transform
+                Matrix4f t;
+                t << 0.8, 0, 0, xPos,
+                    0, 0.8, 0, yPos,
+                    0, 0, 0.8, zPos,
+                    0, 0, 0, 1;
+                fish->Set_Model_Matrix(t);
+
+                //// set object's material
+                fish->Set_Ka(Vector3f(0.1, 0.1, 0.1));
+                fish->Set_Kd(Vector3f(0.7, 0.7, 0.7));
+                fish->Set_Ks(Vector3f(0.5, 0.5, 0.5));
+                fish->Set_Shininess(128);
+
+                //// bind texture to object
+                fish->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("fish_color"));
+                fish->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("fish_normal"));
+
+                //// bind shader to object
+                fish->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+                xPos -= 0.3;
+                yPos += 0.3;
+                zPos -= 0.3;
+            }
         }
 
         //// Here we show an example of adding a mesh with noise-terrain (A6)
@@ -320,6 +396,12 @@ public:
     virtual void Run()
     {
         OpenGLViewer::Run();
+    }
+
+    float hash1d(float t)
+    {
+        t += 3.;
+        return fract(sin(t * 674.3) * 453.2);
     }
 };
 
