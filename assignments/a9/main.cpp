@@ -73,8 +73,8 @@ public:
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/window.png", "window_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/buzz_color.png", "buzz_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/star.png", "star_color");
-        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_color.jpg", "rock_color");
-        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_normal.png", "rock_normal");
+        // OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_color.jpg", "rock_color");
+        // OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_normal.png", "rock_normal");
 
 
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/fish_color.png", "fish_color");
@@ -175,7 +175,7 @@ public:
 
             auto shark = Add_Obj_Mesh_Object("obj/new_shark.obj");
 
-            auto shark = Add_Obj_Mesh_Object("obj/shark.obj");
+            // auto shark = Add_Obj_Mesh_Object("obj/shark.obj");
 
 
             //// set object's transform
@@ -236,31 +236,31 @@ public:
         }
             
         // adding a rock
-        {
-            //// create object by reading an obj mesh
-            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
+        // {
+        //     //// create object by reading an obj mesh
+        //     auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
 
-            //// set object's transform
-            Matrix4f t;
-            t << 0.02, 0, 0, 1.0,
-                0, 0.02, 0, 0,
-                0, 0, 0.02, 0,
-                0, 0, 0, 1;
-            rock->Set_Model_Matrix(t);
+        //     //// set object's transform
+        //     Matrix4f t;
+        //     t << 0.02, 0, 0, 1.0,
+        //         0, 0.02, 0, 0,
+        //         0, 0, 0.02, 0,
+        //         0, 0, 0, 1;
+        //     rock->Set_Model_Matrix(t);
 
-            //// set object's material
-            rock->Set_Ka(Vector3f(0, 0.16, 1.));
-            rock->Set_Kd(Vector3f(1., 0.1, 0.1));
-            rock->Set_Ks(Vector3f(2, 2, 2));
-            rock->Set_Shininess(10);
+        //     //// set object's material
+        //     rock->Set_Ka(Vector3f(0, 0.16, 1.));
+        //     rock->Set_Kd(Vector3f(1., 0.1, 0.1));
+        //     rock->Set_Ks(Vector3f(2, 2, 2));
+        //     rock->Set_Shininess(10);
 
-            //// bind texture to object
-            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
-            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+        //     //// bind texture to object
+        //     // rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+        //     // rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
 
-            //// bind shader to object
-            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
-        }
+        //     //// bind shader to object
+        //     rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+        // }
 
         //// Here we show an example of adding a mesh with noise-terrain (A6)
         {
