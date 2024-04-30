@@ -74,11 +74,8 @@ public:
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/window.png", "window_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/buzz_color.png", "buzz_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/star.png", "star_color");
-        // OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_color.jpg", "rock_color");
-        // OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_normal.png", "rock_normal");
-        //OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_color.jpg", "rock_color");
-        //OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_normal.png", "rock_normal");
-
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_color.png", "rock_color");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_normal.png", "rock_normal");
 
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/fish_color.png", "fish_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/fish_normal.png", "fish_normal");
@@ -93,9 +90,9 @@ public:
         //// You can also create your own lights by directly declaring them in a shader without using Add_Light().
         //// Here we declared three default lights for you. Feel free to add/delete/change them at your will.
 
-        opengl_window->Add_Light(Vector3f(3, 1, 3), Vector3f(0.1, 0.1, 0.4), Vector3f(1, 1, 1), Vector3f(0.5, 0.5, 0.5)); 
-        opengl_window->Add_Light(Vector3f(0, 8, -5), Vector3f(0.1, 0.2, 0.4), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
-        opengl_window->Add_Light(Vector3f(-1, 1, 3), Vector3f(0.1, 0.1, 0.3), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
+        opengl_window->Add_Light(Vector3f(3, 30, 3), Vector3f(0.1, 0.1, 0.4), Vector3f(1, 1, 1), Vector3f(0.5, 0.5, 0.5)); 
+        opengl_window->Add_Light(Vector3f(0, 30, -5), Vector3f(0.1, 0.2, 0.4), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
+        opengl_window->Add_Light(Vector3f(-1, -20, 3), Vector3f(0.1, 0.1, 0.3), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
 
         //// Add the background / environment
         //// Here we provide you with four default options to create the background of your scene:
@@ -183,18 +180,17 @@ public:
 
             //// set object's transform
             Matrix4f t;
-            t << 0.5, 0, 0, 1.0,
-                0, 0.5, 0, 0,
-                0, 0, 0.5, 0,
+            t << 0.6, 0, 0, 1.0,
+                0, 0.8, 0, 0,
+                0, 0, 0.8, 0,
                 0, 0, 0, 1;
             shark->Set_Model_Matrix(t);
 
             //// set object's material
             shark->Set_Ka(Vector3f(0.1, 0.1, 0.1));
-
             shark->Set_Kd(Vector3f(0.9, 0.9, 0.9));
             shark->Set_Ks(Vector3f(0.2, 0.2, 0.2));
-            shark->Set_Shininess(30);
+            shark->Set_Shininess(80);
 
             //// bind texture to object
             shark->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("shark_color"));
@@ -208,7 +204,7 @@ public:
             float center_y = 0.0;
             float center_z = 1.0;
 
-            int numFish = 30;
+            int numFish = 70;
 
             for (int i = 0; i < numFish; i++) {
                 //// create object by reading an obj mesh
@@ -216,14 +212,14 @@ public:
                 //// set object's transform
                 float angle = -i + 3.1415 / 2 + .5 * hash1d(i);
                 Matrix4f t;
-				t << cos(angle),  0,  sin(angle), center_x + 5 * cos(i) + 2 * hash1d(i),
-                    0,            1., 0,          center_y + 0.3 * i - 3 + 2 * hash1d(i),
-                    -sin(angle),  0,  cos(angle), center_z + 5 * sin(i) + 2 * hash1d(i),
+				t << 2.5 * cos(angle),  0,  sin(angle), center_x + 5 * cos(i) + 2 * hash1d(i),
+                    0,            2.5, 0,          center_y + 0.3 * i - 3 + 2 * hash1d(i),
+                    -sin(angle),  0,  2.5 * cos(angle), center_z + 5 * sin(i) + 2 * hash1d(i),
                     0,            0,  0,          1;
                 fish->Set_Model_Matrix(t);
 
                 //// set object's material
-                fish->Set_Ka(Vector3f(0.1, 0.1, 0.1));
+                fish->Set_Ka(Vector3f(0.3, 0.3, 0.3));
                 fish->Set_Kd(Vector3f(0.7, 0.7, 0.7));
                 fish->Set_Ks(Vector3f(0.5, 0.5, 0.5));
                 fish->Set_Shininess(20);
@@ -257,7 +253,7 @@ public:
                 fish->Set_Model_Matrix(t);
 
                 //// set object's material
-                fish->Set_Ka(Vector3f(0.1, 0.1, 0.1));
+                fish->Set_Ka(Vector3f(0.3, 0.3, 0.3));
                 fish->Set_Kd(Vector3f(0.7, 0.7, 0.7));
                 fish->Set_Ks(Vector3f(0.5, 0.5, 0.5));
                 fish->Set_Shininess(20);
@@ -272,33 +268,58 @@ public:
         }
             
         // adding a rock
-        // {
-        //     //// create object by reading an obj mesh
-        //     auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
+        {
+            //// create object by reading an obj mesh
+            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
 
-        //     //// set object's transform
-        //     Matrix4f t;
-        //     t << 0.02, 0, 0, 1.0,
-        //         0, 0.02, 0, 0,
-        //         0, 0, 0.02, 0,
-        //         0, 0, 0, 1;
-        //     rock->Set_Model_Matrix(t);
+            //// set object's transform
+            Matrix4f t;
+            t << 0.02, 0, 0, 10.0,
+                0, 0.05, 0, -8.0,
+                0, 0, 0.02, -10.0,
+                0, 0, 0, 1;
+            rock->Set_Model_Matrix(t);
 
-        //     //// set object's material
-        //     rock->Set_Ka(Vector3f(0, 0.16, 1.));
-        //     rock->Set_Kd(Vector3f(1., 0.1, 0.1));
-        //     rock->Set_Ks(Vector3f(2, 2, 2));
-        //     rock->Set_Shininess(10);
+            //// set object's material
+            rock->Set_Ka(Vector3f(0, 0.5, 1.));
+            rock->Set_Kd(Vector3f(1., 0.5, 0.2));
+            rock->Set_Ks(Vector3f(2, 2, 2));
+            rock->Set_Shininess(10);
 
-        //     //// bind texture to object
-        //     // rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
-        //     // rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+            //// bind texture to object
+            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
 
-        //     //// bind shader to object
-        //     rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
-        // }
+            //// bind shader to object
+            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("environment"));
+        }
 
-        */
+        {
+            //// create object by reading an obj mesh
+            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
+
+            //// set object's transform
+            Matrix4f t;
+            t << 0.02, 0, 0, 18.0,
+                0, 0.03, 0, -8.0,
+                0, 0, 0.02, -5.0,
+                0, 0, 0, 1;
+            rock->Set_Model_Matrix(t);
+
+            //// set object's material
+            rock->Set_Ka(Vector3f(0, 0.16, 1.));
+            rock->Set_Kd(Vector3f(1., 0.1, 0.1));
+            rock->Set_Ks(Vector3f(2, 2, 2));
+            rock->Set_Shininess(10);
+
+            //// bind texture to object
+            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+
+            //// bind shader to object
+            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("environment"));
+        }
+
 
         //// Here we show an example of adding a mesh with noise-terrain (A6)
         {
@@ -311,9 +332,9 @@ public:
                 0, 0.258, 0.965, 0,
                 0, -0.965, 0.258, 0,
                 0, 0, 0, 1;
-            s << 20, 0, 0,0,
+            s << 50, 0, 0,0,
                 0, 20, 0, 0,
-                0, 0, 20, 0,
+                0, 0, 50, 0,
                 0, 0, 0, 1;
             t << 1, 0, 0, -100,
      		0, 1, 0, -20,
