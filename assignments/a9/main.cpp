@@ -129,12 +129,12 @@ public:
         {
             // from https://www.humus.name/index.php?page=Textures
             const std::vector<std::string> cubemap_files{
-                "cubemap/uw_lf.jpg",     //// + X
-                "cubemap/uw_rt.jpg",     //// - X
-                "cubemap/uw_up.jpg",     //// + Y
-                "cubemap/uw_dn.jpg",     //// - Y
-                "cubemap/uw_ft.jpg",     //// + Z
-                "cubemap/uw_bk.jpg",     //// - Z 
+                "cubemap/px.jpg",     //// + X
+		"cubemap/nx.jpg",     //// - X
+		"cubemap/py.jpg",     //// + Y
+		"cubemap/ny.jpg",     //// - Y
+		"cubemap/pz.jpg",     //// + Z
+		"cubemap/nz.jpg",     //// - Z 
             };
             OpenGLTextureLibrary::Instance()->Add_CubeMap_From_Files(cubemap_files, "cube_map");
 
