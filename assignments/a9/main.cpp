@@ -56,6 +56,7 @@ public:
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/billboard.vert", "shaders/alphablend.frag", "billboard");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/terrain.vert", "shaders/terrain.frag", "terrain");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/skybox.vert", "shaders/skybox.frag", "skybox");
+        OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/sand.vert", "shaders/sand.frag", "sand");
 
         //// Load all the textures you need for the scene
         //// In the function call of Add_Shader_From_File(), we specify two names:
@@ -75,6 +76,8 @@ public:
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/star.png", "star_color");
         // OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_color.jpg", "rock_color");
         // OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_normal.png", "rock_normal");
+        //OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_color.jpg", "rock_color");
+        //OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/rock_normal.png", "rock_normal");
 
 
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/fish_color.png", "fish_color");
@@ -295,10 +298,12 @@ public:
         //     rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
         // }
 
+        */
+
         //// Here we show an example of adding a mesh with noise-terrain (A6)
         {
             //// create object by reading an obj mesh
-            auto terrain = Add_Obj_Mesh_Object("obj/plane.obj");
+            auto sand = Add_Obj_Mesh_Object("obj/plane.obj");
 
             //// set object's transform
             Matrix4f r, s, t;
@@ -314,16 +319,16 @@ public:
                  0, 1, 0, -5,
                  0, 0, 1, 1,
                  0, 0, 0, 1,
-            terrain->Set_Model_Matrix(t * s * r);
+            sand->Set_Model_Matrix(t * s * r);
 
             //// set object's material
-            terrain->Set_Ka(Vector3f(0.1f, 0.1f, 0.1f));
-            terrain->Set_Kd(Vector3f(0.7f, 0.7f, 0.7f));
-            terrain->Set_Ks(Vector3f(1, 1, 1));
-            terrain->Set_Shininess(128.f);
+            sand->Set_Ka(Vector3f(0.1f, 0.9f, 0.9f));
+            sand->Set_Kd(Vector3f(0.9f, 0.9f, 0.9f));
+            sand->Set_Ks(Vector3f(1, 1, 1));
+            sand->Set_Shininess(128.f);
 
             //// bind shader to object (we do not bind texture for this object because we create noise for texture)
-            terrain->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain"));
+            sand->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("sand"));
         }
 
         //// Here we show an example of adding a transparent object with alpha blending
