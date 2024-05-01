@@ -1,5 +1,7 @@
 #version 330 core
 
+#define specular_power 20.
+#define specular_intensity 10.
 /*default camera matrices. do not modify.*/
 layout(std140) uniform camera
 {
@@ -44,9 +46,23 @@ out vec4 frag_color;
 
 void main()
 {
-    // vec3 color = shading_texture_with_checkerboard();
+    //vec3 color = shading_texture_with_checkerboard();
     vec3 I = normalize(position.xyz - vtx_position);
     vec3 R = reflect(I, normalize(vtx_normal));
     vec3 color = texture(skybox, vec3(R.x, -R.y, -R.z)).rgb;
     frag_color = vec4(color, 1.0);
+
+	// extending the ray tracing algorithm by implementing specular reflection
+
+	// vector V is the difference of the model and world position
+	vec3 V = normalize(vtx_position-vtx_model_position);
+
+	// calculate specular component
+	// n = 20, which determines how hard/shiny the reflection will be on the rocks
+	float specular = pow(dot(R, V), specular_power) * specular_intensity;
+
+	// making a custom diffuse color based on the color of the noise terrain
+	vec3 new_color = frag_color.rgb + specular * vec3(0.1059, 0.8941, 0.8941);
+
+	frag_color = vec4(new_color, 1.0);
 }

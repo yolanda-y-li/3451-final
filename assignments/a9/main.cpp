@@ -83,6 +83,8 @@ public:
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/shark_color.png", "shark_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/shark_normal.png", "shark_normal");
 
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/ray.png", "ray_color");
+
         //// Add all the lights you need for the scene (no more than 4 lights)
         //// The four parameters are position, ambient, diffuse, and specular.
         //// The lights you declared here will be synchronized to all shaders in uniform lights.
@@ -181,7 +183,7 @@ public:
             //// set object's transform
             Matrix4f t;
             t << 0.6, 0, 0, 1.0,
-                0, 0.8, 0, 0,
+                0, 0.8, 0, 7.0,
                 0, 0, 0.8, 0,
                 0, 0, 0, 1;
             shark->Set_Model_Matrix(t);
@@ -204,7 +206,7 @@ public:
             float center_y = 0.0;
             float center_z = 1.0;
 
-            int numFish = 70;
+            int numFish = 100;
 
             for (int i = 0; i < numFish; i++) {
                 //// create object by reading an obj mesh
@@ -212,9 +214,9 @@ public:
                 //// set object's transform
                 float angle = -i + 3.1415 / 2 + .5 * hash1d(i);
                 Matrix4f t;
-				t << 2.5 * cos(angle),  0,  sin(angle), center_x + 5 * cos(i) + 2 * hash1d(i),
-                    0,            2.5, 0,          center_y + 0.3 * i - 3 + 2 * hash1d(i),
-                    -sin(angle),  0,  2.5 * cos(angle), center_z + 5 * sin(i) + 2 * hash1d(i),
+				t << 2.7 * cos(angle),  0,  sin(angle), center_x + 5 * cos(i) + 2 * hash1d(i),
+                    0,            2.7, 0,          center_y + 0.3 * i - 3 + 2 * hash1d(i),
+                    -sin(angle),  0,  2.7 * cos(angle), center_z + 5 * sin(i) + 2 * hash1d(i),
                     0,            0,  0,          1;
                 fish->Set_Model_Matrix(t);
 
@@ -267,16 +269,16 @@ public:
             }
         }
             
-        // adding a rock
+        // adding rocks
         {
             //// create object by reading an obj mesh
             auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
 
             //// set object's transform
             Matrix4f t;
-            t << 0.02, 0, 0, 10.0,
+            t << 0.03, 0, 0, 12.0,
                 0, 0.05, 0, -8.0,
-                0, 0, 0.02, -10.0,
+                0, 0, 0.03, -16.0,
                 0, 0, 0, 1;
             rock->Set_Model_Matrix(t);
 
@@ -300,7 +302,7 @@ public:
 
             //// set object's transform
             Matrix4f t;
-            t << 0.02, 0, 0, 18.0,
+            t << 0.02, 0, 0, 22.0,
                 0, 0.03, 0, -8.0,
                 0, 0, 0.02, -5.0,
                 0, 0, 0, 1;
@@ -309,7 +311,33 @@ public:
             //// set object's material
             rock->Set_Ka(Vector3f(0, 0.16, 1.));
             rock->Set_Kd(Vector3f(1., 0.1, 0.1));
-            rock->Set_Ks(Vector3f(2, 2, 2));
+            rock->Set_Ks(Vector3f(0.05, 0.05, 0.05));
+            rock->Set_Shininess(1);
+
+            //// bind texture to object
+            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+
+            //// bind shader to object
+            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("environment"));
+        }
+
+        {
+            //// create object by reading an obj mesh
+            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
+
+            //// set object's transform
+            Matrix4f t;
+            t << 0.02, 0, 0, 15.0,
+                0, 0.06, 0, -8.0,
+                0, 0, 0.02, -10.0,
+                0, 0, 0, 1;
+            rock->Set_Model_Matrix(t);
+
+            //// set object's material
+            rock->Set_Ka(Vector3f(0, 0.16, 1.));
+            rock->Set_Kd(Vector3f(1., 0.1, 0.1));
+            rock->Set_Ks(Vector3f(0.05, 0.05, 0.05));
             rock->Set_Shininess(10);
 
             //// bind texture to object
@@ -320,7 +348,108 @@ public:
             rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("environment"));
         }
 
+        {
+            //// create object by reading an obj mesh
+            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
 
+            //// set object's transform
+            Matrix4f t;
+            t << 0.02, 0, 0, 12.0,
+                0, 0.04, 0, -8.0,
+                0, 0, 0.02, -4.0,
+                0, 0, 0, 1;
+            rock->Set_Model_Matrix(t);
+
+            //// set object's material
+            rock->Set_Ka(Vector3f(0, 0.16, 1.));
+            rock->Set_Kd(Vector3f(1., 0.1, 0.1));
+            rock->Set_Ks(Vector3f(0.05, 0.05, 0.05));
+            rock->Set_Shininess(10);
+
+            //// bind texture to object
+            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+
+            //// bind shader to object
+            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("environment"));
+        }
+
+                {
+            //// create object by reading an obj mesh
+            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
+
+            //// set object's transform
+            Matrix4f t;
+            t << 0.02, 0, 0, -12.0,
+                0, 0.04, 0, -8.0,
+                0, 0, 0.02, 4.0,
+                0, 0, 0, 1;
+            rock->Set_Model_Matrix(t);
+
+            //// set object's material
+            rock->Set_Ka(Vector3f(0, 0.16, 1.));
+            rock->Set_Kd(Vector3f(1., 0.1, 0.1));
+            rock->Set_Ks(Vector3f(0.05, 0.05, 0.05));
+            rock->Set_Shininess(10);
+
+            //// bind texture to object
+            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+
+            //// bind shader to object
+            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("environment"));
+        }
+                {
+            //// create object by reading an obj mesh
+            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
+
+            //// set object's transform
+            Matrix4f t;
+            t << 0.02, 0, 0, -15.0,
+                0, 0.06, 0, -8.0,
+                0, 0, 0.02, 10.0,
+                0, 0, 0, 1;
+            rock->Set_Model_Matrix(t);
+
+            //// set object's material
+            rock->Set_Ka(Vector3f(0, 0.16, 1.));
+            rock->Set_Kd(Vector3f(1., 0.1, 0.1));
+            rock->Set_Ks(Vector3f(0.05, 0.05, 0.05));
+            rock->Set_Shininess(10);
+
+            //// bind texture to object
+            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+
+            //// bind shader to object
+            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("environment"));
+        }
+       
+        {
+            //// create object by reading an obj mesh
+            auto rock = Add_Obj_Mesh_Object("obj/rock.obj");
+
+            //// set object's transform
+            Matrix4f t;
+            t << 0.03, 0, 0, -12.0,
+                0, 0.05, 0, -8.0,
+                0, 0, 0.03, 16.0,
+                0, 0, 0, 1;
+            rock->Set_Model_Matrix(t);
+
+            //// set object's material
+            rock->Set_Ka(Vector3f(0, 0.5, 1.));
+            rock->Set_Kd(Vector3f(1., 0.5, 0.2));
+            rock->Set_Ks(Vector3f(2, 2, 2));
+            rock->Set_Shininess(10);
+
+            //// bind texture to object
+            rock->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("rock_color"));
+            rock->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("rock_normal"));
+
+            //// bind shader to object
+            rock->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("environment"));
+        }
         //// Here we show an example of adding a mesh with noise-terrain (A6)
         {
             //// create object by reading an obj mesh
@@ -332,7 +461,7 @@ public:
                 0, 0.258, 0.965, 0,
                 0, -0.965, 0.258, 0,
                 0, 0, 0, 1;
-            s << 50, 0, 0,0,
+            s << 50, 0, 0, 0,
                 0, 20, 0, 0,
                 0, 0, 50, 0,
                 0, 0, 0, 1;
@@ -344,9 +473,9 @@ public:
 
             //// set object's material
             sand->Set_Ka(Vector3f(0.1f, 0.9f, 0.9f));
-            sand->Set_Kd(Vector3f(0.9f, 0.9f, 0.9f));
-            sand->Set_Ks(Vector3f(1, 1, 1));
-            sand->Set_Shininess(128.f);
+            sand->Set_Kd(Vector3f(0.6f, 0.6f, 0.6f));
+            sand->Set_Ks(Vector3f(0.5, 0.5, 0.5));
+            sand->Set_Shininess(60.f);
 
             //// bind shader to object (we do not bind texture for this object because we create noise for texture)
             sand->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("sand"));
